@@ -14,6 +14,9 @@
     "colors",
     "output"
   ],
+  "engines": {
+    "node": ">=6"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/keepitcool/prettyoutput.git"
