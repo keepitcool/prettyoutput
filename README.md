@@ -1,13 +1,12 @@
 # prettyoutput [![NPM version][npm-image]][npm-url] [![build status][travis-image]][travis-url] [![Test coverage][coveralls-image]][coveralls-url]
 
 Library to format js/json object into YAML style readable output.
-A lot of work is done on performances to use it as a logger output formatter.
-This is currently 3 to 5 times quicker than util.inspect which is regularly used in loggers.
-
-A cli tool is also available to format a json file output, but this projet main goal is clearly logging.
+It's performance centric to be used as a logger formatter.
+It's currently 3 to 5 times quicker than util.inspect used by many loggers.
+It's available as a NodeJS library or a cli too.
 
 ## Credits
-This work is based on the work done on the project [prettyjson](https://github.com/rafeca/prettyjson)
+This is based on the great work done on the project [prettyjson](https://github.com/rafeca/prettyjson)
 
 ## How to install
 
@@ -19,64 +18,65 @@ $ npm install prettyoutput
 
 ## Using it
 
-It's pretty easy to use it. You just have to include it in your script and call it:
+It's pretty easy to use. Just have include it in your script and call it:
 
 ```javascript
-const prettyoutput = require('prettyoutput');
+const prettyoutput = require('prettyoutput')
 
 const data = {
   username: 'kic',
   url: 'https://github.com/keepitcool',
   projects: ['prettyoutput', '3m2tuio']
-};
+}
 
-console.log(prettyoutput(data));
+console.log(prettyoutput(data))
 ```
 
-And will output:
+Output:
 
 ![Example](docs/images/example.png)
 
-### Signature
+### API
 
-```
-const prettyoutput = require('prettyoutput');
+```javascript
+const prettyoutput = require('prettyoutput')
 prettyoutput(data, options, indent)
 ```
 
 Parameters are :
- * {*} data : js or json object
- * {Object} [options] : Optional. options are defined below
- * {number} [indent] : Optional. first level of indent
+ * {*} data            : js or json object
+ * {Object} [options]  : Optional. See options below
+ * {number} [indent]   : Optional. Indent all output
 
 Options are :
- * {number} [indentationLength] : Space count for an indentation
- * {number} [maxDepth] : maximum sublevel of nested objects/arrays to output. Default: 3
- * {boolean} [noColor] : Disable coloring. Default: false
- * {colors} [colors] : input colors. Described below.
+ * {number} [indentationLength]  : Length of indentation (in terms of space)
+ * {number} [maxDepth]           : maximum sublevel of nested objects/arrays to output. Default: 3
+ * {boolean} [noColor]           : disable colors. Default: false
+ * {colors} [colors]             : Output colors. See below
 
 Colors are :
- * {string} [keys] : Objects keys color. Default: green
- * {string} [dash] : Array prefixing values dash. Default: green
- * {string} [number] : Numbers color. Default: blue
- * {string} [string] : Strings color. Default: no color
- * {string} [true] : Boolean value 'true' color. Default: green
- * {string} [false] : Boolean value 'false' color. Default: red
- * {string} [null] : 'Null' color. Default: grey
+ * {string} [keys]     : Objects keys color. Default: green
+ * {string} [dash]     : Array prefixing dash ("- "). Default: green
+ * {string} [number]   : Numbers color. Default: blue
+ * {string} [string]   : Strings color. Default: no color
+ * {string} [true]     : Boolean value 'true' color. Default: green
+ * {string} [false]    : Boolean value 'false' color. Default: red
+ * {string} [null]     : 'Null' color. Default: grey
 
+Example using options :
 ```javascript
-const prettyoutput = require('prettyoutput');
+const prettyoutput = require('prettyoutput')
 
 const data = {
   username: 'kic',
   url: 'https://github.com/keepitcool',
   projects: ['prettyoutput', '3m2tuio']
-};
+}
 
 const colors = {
-  keys: blue,
-  null: red
-};
+  keys: 'blue',
+  'null': 'red'
+}
 
 const options = {
   noColor: true,
@@ -84,18 +84,19 @@ const options = {
   colors: colors
 };
 
-console.log(prettyjson.render(data, options, 2);
+console.log(prettyoutput(data, options, 2);
 ```
 
 ## Cli usage
 
-A command line tool is available to render JSON objects
+Command line tool support file param or stdin.
 
 Usage:
 ```bash
 $ prettyoutput package.json
 ```
 
+This should output :
 ![Example](docs/images/example_cli.png)
 
 ### Command line options
@@ -103,23 +104,27 @@ $ prettyoutput package.json
 It's possible to customize the output through some command line options:
 
 ```bash
-# Change colors
-$ prettyjson --indentationLength=4 --depth=5 --noColor package.json
-
-# Do not use colors
-$ prettyjson --nocolor=1 package.json
-
-# Change indentation
-$ prettyjson --indent=4 package.json
-
-# Render arrays elements in a single line
-$ prettyjson --inline-arrays=1 package.json
+# Indent 4, max depth 5, disable colors
+$ prettyjson --indent=4 --depth=5 --noColor package.json
 ```
 
-## Benchmarks
-Performance is on of the main goal of this projet to use it in logs
-Currently, jsonoutput is 3 times quicker than util.inspect and 2.5 times quicker than prettyjson, the library it's inspired from.
-Below detail results :
+or
+
+```bash
+# Indent 4, max depth 5, disable colors
+$ cat package.json | prettyjson --indent=4 --depth=5 --noColor
+```
+
+## Benchmark
+Project target logging, so performance is an issue.
+Currently, prettyoutput is 3 times quicker than util.inspect and 2.5 times quicker than prettyjson, the library it's inspired from.
+
+To run benchmark, just run :
+```bash
+$ node benchmark/benchmark.js
+```
+
+Results :
 ```
 LEVELS | KEYS | LOOPS | WEIGTHS
 3      | 20   | 100   | serializable: 0.9    array: 0.3    object: 0.5    multilineString: 0.3    error: 0.2

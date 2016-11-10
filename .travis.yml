@@ -1,5 +1,9 @@
 language: "node_js"
+node_js:
+  - "4"
+  - "6"
+script:
+  - npm test
+  - npm run codecov
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-node_js:
-  - "6"

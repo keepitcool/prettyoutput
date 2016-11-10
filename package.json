@@ -3,7 +3,7 @@
   "name": "prettyoutput",
   "description": "Librarie to format js/json objects into a YAML-style colored output. Especially useful to pretty print logs. Performant (benchmarks)",
   "version": "1.0.0",
-  "homepage": "http://githu.com/keepitcool/prettyoutput",
+  "homepage": "http://github.com/keepitcool/prettyoutput",
   "keywords": [
     "json",
     "js",
@@ -15,7 +15,7 @@
     "output"
   ],
   "engines": {
-    "node": ">=6"
+    "node": ">=4"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "test": "./node_modules/.bin/mocha --reporter spec",
     "eslint": "./node_modules/.bin/eslint . bin/prettyoutput",
     "coverage": "nyc npm run test",
+    "codecov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
     "benchmark": "node ./benchmark/benchmark.js",
     "changelog": "git log $(git describe --tags --abbrev=0)..HEAD --pretty='* %s' --first-parent"
   },
@@ -42,11 +43,12 @@
     "lodash": "4.16.6"
   },
   "devDependencies": {
+    "columnify": "1.5.4",
     "eslint": "3.9.1",
+    "istanbul": "0.4.5",
     "mocha": "3.1.2",
     "nyc": "8.4.0",
-    "should": "11.1.1",
-    "columnify": "1.5.4",
-    "prettyjson": "1.1.3"
+    "prettyjson": "1.1.3",
+    "should": "11.1.1"
   }
 }
