@@ -1,0 +1,63 @@
+#!/usr/bin/env node
+'use strict'
+
+const prettyoutput = require('../lib/prettyoutput')
+const fs=require('fs')
+const colors = require('colors/safe')
+
+var program = require('commander')
+
+program
+    .usage('[options] <file ...>')
+    .version(require('../package.json').version)
+    .option('-i, --indent [indent]', 'Space per indent', parseInt)
+    .option('-n, --noColor', 'Disable color')
+    .option('-d, --depth [depth]', 'Max depth inspection', parseInt)
+    .parse(process.argv)
+
+const options = {
+    indentationLength: program.indent,
+    noColor: program.noColor,
+    maxDepth: program.depth
+}
+
+const renderInput = function (data) {
+    let input = ''
+    try {
+        input = JSON.parse(data)
+    } catch (e) {
+        console.error(`${colors.red('Error:')} unparsable file`) //eslint-disable-line no-console
+        process.exit(2) //eslint-disable-line no-process-exit
+    }
+
+    console.log(prettyoutput(input, options)) //eslint-disable-line no-console
+}
+
+if (program.args.length) {
+    // First parameter is the file to read and parse
+    const filename = program.args[0]
+    try {
+        renderInput(fs.readFileSync(filename, 'utf8')) //eslint-disable-line no-sync
+    } catch (e) {
+        console.error(`${colors.red('Error:')} File ${filename} does not exist"`) //eslint-disable-line no-console
+        process.exit(1) //eslint-disable-line no-process-exit
+    }
+} else {
+    // Read input stream
+
+    let streamData = ''
+
+    process.stdin.resume()
+    process.stdin.setEncoding('utf8')
+    process.stdin.on('data', (chunk) => {
+        if (chunk === '\n') {
+            renderInput(streamData)
+            streamData = ''
+            return
+        }
+        streamData += chunk
+    })
+    process.stdin.on('end', () => {
+        renderInput(streamData)
+    })
+}
