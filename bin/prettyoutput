@@ -13,6 +13,7 @@ program
     .option('-i, --indent [indent]', 'Space per indent', parseInt)
     .option('-n, --noColor', 'Disable color')
     .option('-d, --depth [depth]', 'Max depth inspection', parseInt)
+    .option('--debug', 'debug mode')
     .parse(process.argv)
 
 const options = {
@@ -22,12 +23,11 @@ const options = {
 }
 
 const renderInput = function (data) {
-    let input = ''
+    let input = data
     try {
         input = JSON.parse(data)
     } catch (e) {
-        console.error(`${colors.red('Error:')} unparsable file`) //eslint-disable-line no-console
-        process.exit(2) //eslint-disable-line no-process-exit
+        if (program.debug) console.error(`${colors.red('Error:')} unparsable content`) //eslint-disable-line no-console
     }
 
     console.log(prettyoutput(input, options)) //eslint-disable-line no-console
