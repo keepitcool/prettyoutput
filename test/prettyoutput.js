@@ -224,6 +224,17 @@ describe('prettyoutput general tests', () => {
             ''
         ].join('\n'))
     })
+
+    it('should allow turning off aligning hash key values', () => {
+        const input = { veryLargeParam: 'first string', param: 'second string' }
+        const output = prettyoutput(input, { alignKeyValues: false })
+
+        output.should.equal([
+            `${colors.green('veryLargeParam: ')}first string`,
+            `${colors.green('param: ')}second string`,
+            ''
+        ].join('\n'))
+    })
 })
 
 describe('Printing numbers, booleans and other objects', () => {
