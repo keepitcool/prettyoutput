@@ -55,13 +55,14 @@ Options are :
  * {colors} [colors]             : Output colors. See below
 
 Colors are :
- * {string} [keys]     : Objects keys color. Default: green
- * {string} [dash]     : Array prefixing dash ("- "). Default: green
- * {string} [number]   : Numbers color. Default: blue
- * {string} [string]   : Strings color. Default: no color
- * {string} [true]     : Boolean value 'true' color. Default: green
- * {string} [false]    : Boolean value 'false' color. Default: red
- * {string} [null]     : 'Null' color. Default: grey
+ * {string} [keys]       : Objects keys color. Default: green
+ * {string} [dash]       : Array prefixing dash ("- "). Default: green
+ * {string} [number]     : Numbers color. Default: blue
+ * {string} [string]     : Strings color. Default: no color
+ * {string} [true]       : Boolean value 'true' color. Default: green
+ * {string} [false]      : Boolean value 'false' color. Default: red
+ * {string} [null]       : 'Null' color. Default: grey
+ * {string} [undefined]  : 'Undefined' color. Default: grey
 
 Example using options :
 ```javascript

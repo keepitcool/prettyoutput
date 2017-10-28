@@ -253,6 +253,13 @@ describe('Printing numbers, booleans and other objects', () => {
         output.should.equal(`    ${colors.grey('null')}\n`)
     })
 
+    it('should print undefined correctly ', () => {
+        const input = undefined
+        const output = prettyoutput(input, {}, 4)
+
+        output.should.equal(`    ${colors.grey('undefined')}\n`)
+    })
+
     it('should print an Error correctly ', () => {
         Error.stackTraceLimit = 1
         const input = new Error('foo')
