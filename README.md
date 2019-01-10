@@ -53,6 +53,7 @@ Options are :
  * {number} [maxDepth]           : maximum sublevel of nested objects/arrays to output. Default: 3
  * {boolean} [noColor]           : disable colors. Default: false
  * {colors} [colors]             : Output colors. See below
+ * {boolean} [alignKeyValues]    : Align key values. Default: true
 
 Colors are :
  * {string} [keys]       : Objects keys color. Default: green
