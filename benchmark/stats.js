@@ -2,15 +2,15 @@
 
 const _ = require('lodash')
 
-const fixedInt = exports.fixedInt = function (v) {
+const fixedInt = (exports.fixedInt = function(v) {
     return Math.floor(v)
-}
+})
 
 /**
  *
  * @param {number} time - in nano seconds
  */
-exports.prettyTime = function (time) {
+exports.prettyTime = function(time) {
     const mn = fixedInt(time / 1e12)
     const s = fixedInt(time / 1e9) - fixedInt(mn * 1e3)
     const ms = fixedInt(time / 1e6) - fixedInt(mn * 1e6) - fixedInt(s * 1e3)
@@ -25,14 +25,14 @@ exports.prettyTime = function (time) {
     if (ns != 0) result += ` ${ns} ns`
 
     return result
-};
+}
 
-exports.stats = function (diffs) {
+exports.stats = function(diffs) {
     let min = diffs[0]
     let max = diffs[0]
     let total = 0
 
-    _.forEach(diffs, (diff) => {
+    _.forEach(diffs, diff => {
         min = Math.min(min, diff)
         max = Math.max(max, diff)
         total += diff
@@ -42,7 +42,7 @@ exports.stats = function (diffs) {
     return { min, max, mean, total }
 }
 
-exports.prettyStats = function (stats) {
+exports.prettyStats = function(stats) {
     const result = {}
     result.min = exports.prettyTime(stats.min)
     result.max = exports.prettyTime(stats.max)
