@@ -2,7 +2,7 @@
   "author": "Nadim <nadim.boustani@gmail.com> (https://github.com/bnadim)",
   "name": "prettyoutput",
   "description": "Librarie to format js/json objects into a YAML-style colored output. Especially useful to pretty print logs. Performant (benchmarks)",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "homepage": "http://github.com/keepitcool/prettyoutput",
   "keywords": [
     "json",
