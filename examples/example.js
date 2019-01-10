@@ -1,5 +1,7 @@
 const prettyoutput = require('../lib/prettyoutput')
 
+/* eslint-disable no-console */
+
 const data = {
     username: 'kic',
     url: 'https://github.com/keepitcool',
