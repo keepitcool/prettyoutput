@@ -228,6 +228,12 @@ describe('Printing numbers, booleans and other objects', () => {
         output.should.equal(`    ${colors.grey('undefined')}\n`)
     })
 
+    it('should not print undefined if hideUndefined is true', () => {
+        const input = { foo: undefined }
+        const output = prettyoutput(input, { hideUndefined: true }, 4)
+        output.should.equal('')
+    })
+
     it('should print an Error correctly ', () => {
         Error.stackTraceLimit = 1
         const input = new Error('foo')
