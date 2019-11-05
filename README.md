@@ -55,6 +55,7 @@ Options are :
  * {colors} [colors]             : Output colors. See below
  * {boolean} [alignKeyValues]    : Align key values. Default: true
  * {boolean} [hideUndefined]     : Do not display undefined values. Default: false
+ * {boolean} [noSeparator]       : Do not display key separator Default: false
 
 Colors are :
  * {string} [keys]       : Objects keys color. Default: green
